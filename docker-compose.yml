@@ -1,0 +1,14 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres"
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "MyUser"
+      POSTGRES_PASSWORD: "Password!23"
+      POSTGRES_DB: "sfr-database"
+    volumes: 
+      - psql:/var/lib/postgresql/data-2
+volumes:
+  psql:
