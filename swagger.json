@@ -1,15 +1,10 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "sfr",
-    "version": "1.0",
-    "description": "Projet super cool"
+    "title": "SFR Back",
+    "version": "",
+    "description": ""
   },
-  "servers": [
-    {
-      "url": "http://localhost:3000"
-    }
-  ],
   "paths": {
     "/users/{userId}": {
       "parameters": [
@@ -150,90 +145,30 @@
         }
       }
     },
-    "/user": {
-      "post": {
-        "summary": "Create New User",
-        "operationId": "post-user",
+    "/telephone-projets/{telephoneProjetID}": {
+      "get": {
+        "summary": "Récupérer un projet client",
         "responses": {
           "200": {
-            "description": "User Created",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "examples": {
-                  "New User Bob Fellow": {
-                    "value": {
-                      "id": 12,
-                      "firstName": "Bob",
-                      "lastName": "Fellow",
-                      "email": "bob.fellow@gmail.com",
-                      "dateOfBirth": "1996-08-24",
-                      "emailVerified": false,
-                      "createDate": "2020-11-18"
+                  "type": "object",
+                  "properties": {
+                    "nom": {
+                      "type": "string"
+                    },
+                    "prenom": {
+                      "type": "string"
                     }
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Missing Required Information"
-          },
-          "409": {
-            "description": "Email Already Taken"
           }
         },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "firstName": {
-                    "type": "string"
-                  },
-                  "lastName": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "dateOfBirth": {
-                    "type": "string",
-                    "format": "date"
-                  }
-                },
-                "required": [
-                  "firstName",
-                  "lastName",
-                  "email",
-                  "dateOfBirth"
-                ]
-              },
-              "examples": {
-                "Create User Bob Fellow": {
-                  "value": {
-                    "firstName": "Bob",
-                    "lastName": "Fellow",
-                    "email": "bob.fellow@gmail.com",
-                    "dateOfBirth": "1996-08-24"
-                  }
-                }
-              }
-            }
-          },
-          "description": "Post the necessary fields for the API to create a new user."
-        },
-        "description": "Create a new user."
-      }
-    },
-    "/projets-clients": {
-      "get": {
-        "summary": "Récupérer un projet client",
-        "responses": {},
-        "operationId": "get-demande",
+        "operationId": "",
         "x-internal": false,
         "description": "",
         "tags": [
@@ -249,7 +184,16 @@
           }
         ]
       },
-      "parameters": [],
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "telephoneProjetID",
+          "in": "path",
+          "required": true
+        }
+      ],
       "post": {
         "summary": "Ajouter un projet client",
         "operationId": "post-projet-client",
@@ -278,13 +222,42 @@
                     "type": "string"
                   }
                 }
-              }
+              },
+              "examples": {}
             }
           }
         },
         "tags": [
           "projet-client"
         ]
+      },
+      "put": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Mettre a jour le projet de telephone",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nom": {
+                    "type": "string"
+                  },
+                  "prenom": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
       }
     },
     "/dossier-client": {
@@ -314,6 +287,14 @@
         "responses": {},
         "operationId": "get-solution",
         "description": "Propose des solutions pour la téléphonie, le crédit, le gaz"
+      }
+    },
+    "/projets-clients": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-projets-clients"
       }
     }
   },
@@ -380,6 +361,12 @@
             "type": "string"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "Token": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }

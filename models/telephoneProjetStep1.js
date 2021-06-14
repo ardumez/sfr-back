@@ -16,5 +16,8 @@ module.exports = (sequelize) => {
       allowNull: false,
       type: DataTypes.STRING
     },
+  }, {
+    freezeTableName: true,
+    tableName: 'telephones_projets_step1'
   });
 };
