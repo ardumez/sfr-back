@@ -2,10 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var usersRouter = require('./routes/users');
-var telephoneProjets = require('./routes/telephonesProjets');
+var projetTelephoneRoute = require('./src/Routes/ProjetTelephoneRoute');
 var swaggerUiDist = require("swagger-ui-dist");
 var cors = require('cors');
 
@@ -18,9 +15,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/telephones-projets', telephoneProjets);
+app.use('/projet-telephone', projetTelephoneRoute);
 
 // swagger
 app.use('/swagger-ui', express.static(swaggerUiDist.getAbsoluteFSPath()));

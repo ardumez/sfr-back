@@ -1,7 +1,4 @@
 version: "3"
-volumes:
-  postgres_sfr_back:
-      driver: local
 services:
   postgres:
     image: "postgres"
@@ -10,24 +7,25 @@ services:
     environment:
       POSTGRES_USER: "MyUser"
       POSTGRES_PASSWORD: "Password!23"
-      POSTGRES_MULTIPLE_DATABASES: "sfr-database"
+      POSTGRES_DB: "sfr-database"
     volumes: 
-      - postgres_sfr_back:/var/lib/postgresql/data
-  # https://github.com/keycloak/keycloak-containers/blob/master/docker-compose-examples/keycloak-postgres.yml
+      - sfr-database-volume:/var/lib/postgresql/data
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: keycl"MyUser"oak
-      DB_SCHEMA: public
-      DB_PASSWORD: password
+      DB_DATABASE: "sfr-database"
+      DB_USER: "MyUser"
+      DB_SCHEMA: keycloak
+      DB_PASSWORD: "Password!23"
       KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: Pa55w0rd
-      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-      #JDBC_PARAMS: "ssl=true"
+      KEYCLOAK_PASSWORD: "Password!23"
     ports:
       - 8080:8080
     depends_on:
       - postgres
+volumes:
+  sfr-database-volume:
+    name: sfr-database-volume
+    external: true
