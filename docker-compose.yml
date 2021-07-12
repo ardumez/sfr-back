@@ -2,6 +2,7 @@ version: "3"
 services:
   postgres:
     image: "postgres"
+    container_name: postgres
     ports:
       - 5432:5432
     environment:
@@ -10,8 +11,19 @@ services:
       POSTGRES_DB: "sfr-database"
     volumes: 
       - sfr-database-volume:/var/lib/postgresql/data
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - sfr-database-volume:/data/db
+    ports:
+      - 27017:27017
   keycloak:
     image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: postgres

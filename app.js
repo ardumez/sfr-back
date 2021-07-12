@@ -3,6 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var projetTelephoneRoute = require('./src/Routes/ProjetTelephoneRoute');
+var operateurRoute = require('./src/Routes/OperateurRoute');
 var swaggerUiDist = require("swagger-ui-dist");
 var cors = require('cors');
 
@@ -15,6 +16,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
+app.use('/operateur', operateurRoute);
 app.use('/projet-telephone', projetTelephoneRoute);
 
 // swagger
