@@ -8,6 +8,8 @@ exports.mapStep1ToCommand = (req) => {
 
 exports.mapStep1ToResponse = (model) => {
   return {
-    id: model.id
+    id: model.id,
+    nom: model.nom,
+    prenom: model.prenom
   }
 };

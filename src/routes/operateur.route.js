@@ -1,19 +1,19 @@
 var express = require('express');
-var { mapStep1ToCommand } = require("../Mappers/ProjetTelephoneMapper");
-var { postCreateStep1Command } = require("../Controllers/ProjetTelephoneController");
+var { mapStep1ToCommand } = require("../mappers/telephone-projet.mapper");
+var { postCreateStep1Command } = require("../controllers/telephone-projet.controller");
 var { body } = require('express-validator');
-var validationResult = require('../Middlewares/ValidationResultMiddleware');
+var validationResult = require('../middlewares/validation-result.middleware');
 
 var router = express.Router();
 
 router.get('/all', function (req, res, next) {
   var projetClientId = req.query.projetClientId;
-  var operateur = {
+  var operateur = [{
     label: 'Orange',
     code: 'ORANGE',
     dureeAppel: ['APPELS_2H', 'APPEL_ILIMITE'],
-  };
-  res.json({ "projetClientId": projetClientId });
+  }];
+  res.json(operateur);
 });
 
 router.get('/filters/dureeAppel', function (req, res, next) {

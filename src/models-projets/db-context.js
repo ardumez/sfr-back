@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const defTelephoneProjetStep1 = require('./telephoneProjetStep1');
-const defProjetClient = require('./projetClient');
-const detProjetType = require('./projetType');
+const defTelephoneProjetStep1 = require('./telephone-projet-step1.model');
+const defProjetClient = require('./projet-client.model');
+const detProjetType = require('./projet-type.model');
 
 const sequelize = new Sequelize('postgres://MyUser:Password!23@localhost:5432/sfr-database');
 

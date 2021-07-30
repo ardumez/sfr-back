@@ -1,5 +1,5 @@
-var { dbContext } = require("../ModelsProjets/dbContext");
-var { mapStep1ToResponse } = require("../Mappers/ProjetTelephoneMapper");
+var { dbContext } = require("../models-projets/db-context");
+var { mapStep1ToResponse } = require("../mappers/telephone-projet.mapper");
 
 exports.postCreateStep1Command = async (createStep1Command) => {
   var projetClient = await dbContext.projetClient.create({

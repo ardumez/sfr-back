@@ -2,8 +2,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var projetTelephoneRoute = require('./src/Routes/ProjetTelephoneRoute');
-var operateurRoute = require('./src/Routes/OperateurRoute');
+var projetTelephoneRoute = require('./src/routes/telephone-projet.route');
+var operateurRoute = require('./src/routes/operateur.route');
 var swaggerUiDist = require("swagger-ui-dist");
 var cors = require('cors');
 

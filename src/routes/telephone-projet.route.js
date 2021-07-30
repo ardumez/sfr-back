@@ -1,8 +1,8 @@
 var express = require('express');
-var { mapStep1ToCommand } = require("../Mappers/ProjetTelephoneMapper");
-var { postCreateStep1Command } = require("../Controllers/ProjetTelephoneController");
+var { mapStep1ToCommand } = require("../mappers/telephone-projet.mapper");
+var { postCreateStep1Command } = require("../controllers/telephone-projet.controller");
 var { body } = require('express-validator');
-var validationResult = require('../Middlewares/ValidationResultMiddleware');
+var validationResult = require('../middlewares/validation-result.middleware');
 
 var router = express.Router();
 
