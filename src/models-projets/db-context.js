@@ -3,13 +3,16 @@ const defTelephoneProjetStep1 = require('./telephone-projet-step1.model');
 const defProjetClient = require('./projet-client.model');
 const detProjetType = require('./projet-type.model');
 
-const sequelize = new Sequelize('postgres://MyUser:Password!23@localhost:5432/sfr-database');
+const sequelize = new Sequelize(
+  'postgres://MyUser:Password!23@localhost:5432/sfr-database',
+);
 
-sequelize.authenticate()
+sequelize
+  .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('Unable to connect to the database:', err);
   });
 
@@ -20,20 +23,19 @@ const projetType = detProjetType(sequelize);
 telephoneProjetStep1.belongsTo(projetClient);
 projetClient.belongsTo(projetType);
 
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log(`Database OK`);
-    projetType.bulkCreate([
-      { code: 'TELEPHONE' },
-      { code: 'ELECTRICITE' },
-      { code: 'INTERNET' }
-    ]);
-  });
+sequelize.sync({ force: true }).then(() => {
+  console.log('Database OK');
+  projetType.bulkCreate([
+    { code: 'TELEPHONE' },
+    { code: 'ELECTRICITE' },
+    { code: 'INTERNET' },
+  ]);
+});
 
 module.exports = {
   dbContext: {
     telephoneProjetStep1,
     projetClient,
-    projetType
-  }
+    projetType,
+  },
 };
