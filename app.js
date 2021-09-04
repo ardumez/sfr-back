@@ -6,7 +6,7 @@ const swaggerUiDist = require('swagger-ui-dist');
 const cors = require('cors');
 const projetTelephoneRoute = require('./src/routes/telephone-projet.route');
 const operateurRoute = require('./src/routes/operateur.route');
-require('dotenv').config();
+require('./src/models-operateurs/operateurs-db-context.model');
 
 const app = express();
 app.use(cors());

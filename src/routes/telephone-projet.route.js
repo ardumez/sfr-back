@@ -1,24 +1,21 @@
-var express = require('express');
-var { mapStep1ToCommand } = require("../mappers/telephone-projet.mapper");
-var { postCreateStep1Command } = require("../controllers/telephone-projet.controller");
-var { body } = require('express-validator');
-var validationResult = require('../middlewares/validation-result.middleware');
+const express = require('express');
+const { body } = require('express-validator');
+const telephoneProjetController = require('../controllers/telephone-projet.controller');
+const validationResult = require('../middlewares/validation-result.middleware');
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/', function (req, res, next) {
-  var projetClientId = req.query.projetClientId;
-  res.json({ "projetClientId": projetClientId });
+router.get('/', (req, res) => {
+  const { projetClientId } = req.query;
+  res.json({ projetClientId });
 });
 
-router.post('/step1',
+router.post(
+  '/step1',
   body('nom').not().isEmpty(),
   body('prenom').not().isEmpty(),
   validationResult,
-  async (req, res) => {
-    var step1Command = mapStep1ToCommand(req);
-    var result = await postCreateStep1Command(step1Command);
-    res.json(result);
-  });
+  telephoneProjetController.addStep1,
+);
 
 module.exports = router;

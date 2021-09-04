@@ -1,32 +1,34 @@
-var express = require('express');
-var { mapStep1ToCommand } = require("../mappers/telephone-projet.mapper");
-var { postCreateStep1Command } = require("../controllers/telephone-projet.controller");
-var { body } = require('express-validator');
-var validationResult = require('../middlewares/validation-result.middleware');
+const express = require('express');
+const { getOperateurs } = require('../controllers/operateur.controller');
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/all', function (req, res, next) {
-  var projetClientId = req.query.projetClientId;
-  var operateur = [{
-    label: 'Orange',
-    code: 'ORANGE',
-    dureeAppel: ['APPELS_2H', 'APPEL_ILIMITE'],
-  }];
-  res.json(operateur);
-});
+/* eslint-disable no-unused-vars */
+router.get('/all', getOperateurs);
 
-router.get('/filters/dureeAppel', function (req, res, next) {
-  var filters = [
-    { code: 'APPELS_2H', label: '2h d\'appels' },
+// const operateur = [
+//   {
+//     label: 'Orange',
+//     code: 'ORANGE',
+//     dureeAppel: ['APPELS_2H', 'APPEL_ILIMITE'],
+//   },
+// ];
+
+/* eslint-disable no-unused-vars */
+router.get('/filters/dureeAppel', (req, res, next) => {
+  /* eslint-enable no-unused-vars */
+  const filters = [
+    { code: 'APPELS_2H', label: "2h d'appels" },
     { code: 'APPEL_ILIMITE', label: 'Ilimité' },
   ];
   res.json(filters);
 });
 
-router.get('/forfait/search', function (req, res, next) {
-  var projetClientId = req.query.operateurMobileId;
-  res.json({ "operateurMobile": projetClientId, "titre": "Forfait 2h Illimité" });
+/* eslint-disable no-unused-vars */
+router.get('/forfait/search', (req, res, next) => {
+  /* eslint-enable no-unused-vars */
+  const projetClientId = req.query.operateurMobileId;
+  res.json({ operateurMobile: projetClientId, titre: 'Forfait 2h Illimité' });
 });
 
 module.exports = router;

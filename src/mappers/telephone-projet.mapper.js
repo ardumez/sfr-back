@@ -1,15 +1,10 @@
+exports.mapStep1ToCommand = (req) => ({
+  nom: req.body.nom,
+  prenom: req.body.prenom,
+});
 
-exports.mapStep1ToCommand = (req) => {
-  return {
-    nom: req.body.nom,
-    prenom: req.body.prenom
-  };
-}
-
-exports.mapStep1ToResponse = (model) => {
-  return {
-    id: model.id,
-    nom: model.nom,
-    prenom: model.prenom
-  }
-};
+exports.toResponseStep1Mapper = (model) => ({
+  id: model.id,
+  nom: model.nom,
+  prenom: model.prenom,
+});

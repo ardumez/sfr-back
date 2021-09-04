@@ -2,9 +2,10 @@ const Sequelize = require('sequelize');
 const defTelephoneProjetStep1 = require('./telephone-projet-step1.model');
 const defProjetClient = require('./projet-client.model');
 const detProjetType = require('./projet-type.model');
+require('dotenv').config();
 
 const sequelize = new Sequelize(
-  'postgres://MyUser:Password!23@localhost:5432/sfr-database',
+  `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@localhost:5432/sfr-projets`,
 );
 
 sequelize
@@ -32,10 +33,7 @@ sequelize.sync({ force: true }).then(() => {
   ]);
 });
 
-module.exports = {
-  dbContext: {
-    telephoneProjetStep1,
-    projetClient,
-    projetType,
-  },
-};
+module.exports.dbContext = {};
+module.exports.dbContext.telephoneProjetStep1 = telephoneProjetStep1;
+module.exports.dbContext.projetClient = projetClient;
+module.exports.dbContext.projetType = projetType;
